@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// Import the necessary libraries. Express is for our server, dotenv is for API keys,
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -14,7 +13,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5005;
 const provider = process.env.AI_PROVIDER || "groq";
-// const baseUrl = process.env.BASE_URL || "http://localhost:5000";
 
 let aiClient; 
 
@@ -36,7 +34,6 @@ if (provider === "gemini") {
 app.use(bodyParser.json());
 app.use(bodyParser.text({ type: "text/plain" }));
 
-// --- NEW: Use the logger for incoming requests ---
 app.use((req, res, next) => {
   logger.info(`Incoming Request: ${req.method} ${req.url}`);
   next();
@@ -165,7 +162,7 @@ Response:
         nlpTestCase = { testCaseName: `${method} ${endpoint} Default Test`, steps: [{ action: "Verify response status", expectedResult: "200 OK" }] };
       }
 
-      logger.info(`✅ Completed AI test generation for ${endpoint}`);
+      logger.info(`Completed AI test generation for ${endpoint}`);
       
       collection.item.push({
         name: nlpTestCase.testCaseName,
@@ -189,17 +186,17 @@ Response:
     const filePath = path.join(saveDir, `${provider}_combined_collection.json`);
     fs.writeFileSync(filePath, JSON.stringify({ collection }, null, 2));
 
-    logger.info(`🎉 All tests generated! Saved to ${filePath}`);
+    logger.info(`All tests generated! Saved to ${filePath}`);
     res.write(JSON.stringify({ step: "done", savedTo: filePath, postmanCollection: collection }) + "\n");
     res.end();
 
   } catch (err) {
-    logger.error(`❌ Error generating tests: ${err.message}`, { stack: err.stack });
+    logger.error(`Error generating tests: ${err.message}`, { stack: err.stack });
     res.write(JSON.stringify({ error: err.message }) + "\n");
     res.end();
   }
 });
 
 app.listen(port, () =>
-  logger.info(`✅ MCP server running with ${provider.toUpperCase()} at http://localhost:${port}/mcp`)
+  logger.info(`MCP server running with ${provider.toUpperCase()} at http://localhost:${port}/mcp`)
 );
