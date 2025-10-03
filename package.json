@@ -1,0 +1,24 @@
+{
+  "name": "postman-official-mcp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node mcpServer.js",
+    "start:http": "node mcpServer.js --streamable-http",
+    "list-tools": "node mcpServer.js --list-tools"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@postman/postman-mcp-server": "^2.3.3",
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "openai": "^5.22.0",
+    "winston": "^3.18.3"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "Postman MCP Server for API Testing"
+}

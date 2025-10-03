@@ -1,0 +1,78 @@
+{
+  "info": {
+    "name": "MCP Server Test",
+    "_postman_id": "mcp-server-collection",
+    "description": "Test MCP server endpoints with JSON and raw text input",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET MCP Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5005/mcp",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5005",
+          "path": ["mcp"]
+        }
+      }
+    },
+    {
+      "name": "Generate Test Case (JSON)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"endpoint\": \"/users\",\n  \"method\": \"GET\",\n  \"description\": \"Fetch all users\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5005/mcp/tools/generate-tests-nlp",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5005",
+          "path": ["mcp", "tools", "generate-tests-nlp"]
+        }
+      }
+    },
+    {
+      "name": "Generate Test Case (Raw Text)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "text/plain" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "GET /users Fetch all users"
+        },
+        "url": {
+          "raw": "http://localhost:5005/mcp/tools/generate-tests-nlp",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5005",
+          "path": ["mcp", "tools", "generate-tests-nlp"]
+        }
+      }
+    },
+    {
+      "name": "List Endpoints",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5005/mcp/tools/list-endpoints",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5005",
+          "path": ["mcp", "tools", "list-endpoints"]
+        }
+      }
+    }
+  ]
+}

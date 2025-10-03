@@ -1,0 +1,18 @@
+{
+    "servers": {
+        "postman-api-http-server": {
+            "type": "sse",
+            "url": "https://mcp.postman.com/minimal",
+            "headers": {
+                "Authorization": "Bearer ${POSTMAN_API_KEY}"
+            }
+        }
+    },
+    "inputs": [
+        {
+            "id": "postman-api-key",
+            "type": "promptString", 
+            "description": "Enter your Postman API key"
+        }
+    ]
+}
