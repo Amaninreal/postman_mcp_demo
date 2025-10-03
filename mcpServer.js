@@ -30,7 +30,7 @@ if (provider === "gemini") {
   });
 }
 
-// Basic server setup.
+// Basic server setup
 app.use(bodyParser.json());
 app.use(bodyParser.text({ type: "text/plain" }));
 
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 const saveDir = path.resolve("generated-tests");
 if (!fs.existsSync(saveDir)) fs.mkdirSync(saveDir, { recursive: true });
 
-// Endpoint to serve the OpenAPI specification.
+// Endpoint to serve the OpenAPI specification
 app.get("/mcp/resources/openapi-spec", (req, res) => {
   try {
     const specFilePath = path.join(process.cwd(), 'openapi.json');
@@ -55,7 +55,7 @@ app.get("/mcp/resources/openapi-spec", (req, res) => {
   }
 });
 
-// Endpoint to dynamically list endpoints from the OpenAPI spec.
+// Endpoint to dynamically list endpoints from the OpenAPI spec
 app.get("/mcp/tools/list-endpoints", async (req, res) => {
   try {
     const specResp = await fetch(`http://localhost:${port}/mcp/resources/openapi-spec`);
@@ -78,7 +78,7 @@ app.get("/mcp/tools/list-endpoints", async (req, res) => {
   }
 });
 
-// Main endpoint for AI test generation.
+// Main endpoint for AI test generation
 app.post("/mcp/tools/generate-tests-nlp", async (req, res) => {
   try {
     const endpointsResp = await fetch(`http://localhost:${port}/mcp/tools/list-endpoints`);
